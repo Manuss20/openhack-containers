@@ -1,0 +1,13 @@
+DB_PASSWORD="9twbp>Jz>:=TiTbP?yUm#6gs@*&bcD"
+DB_Container="sql1"
+DB_USER="sa"
+DB_HOST="localhost"
+DB_NAME="mydrivingDB"
+ACCEPT_EULA="Y"
+PORT_DB=1433
+PORT_API=80
+PORT_API_EXT=8080
+URL_DB_CONTAINER="mcr.microsoft.com/mssql/server:2017-latest"
+DOCKER_NETWORK="openhack.challenge1.network"
+ENV_NETCORE="Local"
+API_Container="poi"
