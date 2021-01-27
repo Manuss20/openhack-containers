@@ -19,4 +19,7 @@ sleep 10
 
 echo "Testing"
 curl -i -X GET "http://localhost:$PORT_API_EXT/api/poi"
-
+curl -i -X GET 'http://localhost:8080/api/poi/264ffaa3-1fe8-4fb0-a4fb-63bdbc9999ae' 
+curl -i -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{ "tripId": "ea2f7ae0-3cef-49cb-b7d1-ce972113120c", "latitude": 47.39026323526123, "longitude": -123.23165568111123, "poiType": 2, "timestamp": "2019-07-12T02:30:03.351Z", "deleted": false }' 'http://localhost:8080/api/poi' 
+curl -i -X GET 'http://localhost:8080/api/poi/trip/ea2f7ae0-3cef-49cb-b7d1-ce972113120c' 
+curl -i -X GET 'http://localhost:8080/api/poi/healthcheck' 

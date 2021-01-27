@@ -1,3 +1,7 @@
+ARC_NAME="hacker3"
+ARC_URL="hacker3.azurecr.io"
+CONTAINER_API="tripinsights/poi:1.0"
+CONTAINER_SQL="mcr.microsoft.com/mssql/server:2017-latest"
 DB_PASSWORD="9twbp>Jz>:=TiTbP?yUm#6gs@*&bcD"
 DB_Container="sql1"
 DB_USER="sa"
