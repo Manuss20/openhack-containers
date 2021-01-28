@@ -1,0 +1,30 @@
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: web-user-full-access
+  namespace: tripviewer
+rules:
+- apiGroups: ["", "extensions", "apps"]
+  resources: ["*"]
+  verbs: ["*"]
+- apiGroups: ["batch"]
+  resources:
+  - jobs
+  - cronjobs
+  verbs: ["*"]
+
+---
+
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: web-user-access
+  namespace: tripviewer
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: web-user-full-access
+subjects:
+- kind: Group
+  namespace: tripviewer
+  name: "8cf89ce4-c6a5-4164-a2a2-d679368c745d"

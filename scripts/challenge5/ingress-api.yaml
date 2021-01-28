@@ -1,0 +1,63 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-api
+  namespace: tripapi
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          serviceName: poi
+          servicePort: 80
+        path: /api/poi
+      - backend:
+          serviceName: poi
+          servicePort: 80
+        path: /api/poi/healthcheck
+      - backend:
+          serviceName: poi
+          servicePort: 80
+        path: /api/docs/poi
+      - backend:
+          serviceName: trips
+          servicePort: 80
+        path: /api/trips
+      - backend:
+          serviceName: trips
+          servicePort: 80
+        path: /api/trips/user
+      - backend:
+          serviceName: trips
+          servicePort: 80
+        path: /api/trips/healthcheck
+      - backend:
+          serviceName: trips
+          servicePort: 80
+        path: /api/docs/trips
+      - backend:
+          serviceName: userprofile
+          servicePort: 80
+        path: /api/user
+      - backend:
+          serviceName: userprofile
+          servicePort: 80
+        path: /api/user/healthcheck
+      - backend:
+          serviceName: userprofile
+          servicePort: 80
+        path: /api/docs/user
+      - backend:
+          serviceName: user-java
+          servicePort: 80
+        path: /api/user-java
+      - backend:
+          serviceName: user-java
+          servicePort: 80
+        path: /api/user-java/healthcheck
+      - backend:
+          serviceName: user-java
+          servicePort: 80
+        path: /api/docs/user-java

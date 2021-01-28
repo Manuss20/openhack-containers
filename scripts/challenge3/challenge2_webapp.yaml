@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp
+  labels:
+    app: webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers:
+        - name: webapp
+          image: hacker3.azurecr.io/webapp:v1
+          ports:
+            - containerPort: 80
+          env:
+            - name: TRIPS_API_ENDPOINT
+              value: "http://tripapi"
+            - name: USERPROFILE_API_ENDPOINT
+              value: "http://userprofileapi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+  selector:
+    app: webapp

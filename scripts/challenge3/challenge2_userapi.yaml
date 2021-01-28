@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: userapi
+  labels:
+    app: userapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: userapi
+  template:
+    metadata:
+      labels:
+        app: userapi
+    spec:
+      containers:
+        - name: userapi
+          image: hacker3.azurecr.io/userapi:v1
+          ports:
+            - containerPort: 80
+          env:
+            - name: PORT
+              value: "80"
+            - name: SQL_USER
+              value: "sqladminvOx1488"
+            - name: SQL_PASSWORD
+              value: "nH9fl8Tp7"
+            - name: SQL_SERVER
+              value: "sqlservervox1488.database.windows.net"
+            - name: SQL_DBNAME
+              value: "mydrivingDB"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: userapi
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+  selector:
+    app: userapi

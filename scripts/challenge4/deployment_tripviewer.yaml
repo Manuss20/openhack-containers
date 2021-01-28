@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tripviewer
+  namespace: tripviewer
+  labels:
+    app: webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tripviewer
+  template:
+    metadata:
+      labels:
+        app: tripviewer
+    spec:
+      containers:
+        - name: tripviewer
+          image: hacker3.azurecr.io/webapp:v1
+          ports:
+            - containerPort: 80
+          env:
+            - name: TRIPS_API_ENDPOINT
+              value: "http://trips.tripapi.svc.cluster.local"
+            - name: USERPROFILE_API_ENDPOINT
+              value: "http://userprofile.tripapi.svc.cluster.local"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tripviewer
+  namespace: tripviewer
+spec:
+  type: ClusterIP
+  ports:
+    - name: 
+      port: 80
+  selector:
+    app: tripviewer

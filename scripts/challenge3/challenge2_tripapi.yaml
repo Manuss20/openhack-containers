@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tripapi
+  labels:
+    app: tripapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tripapi
+  template:
+    metadata:
+      labels:
+        app: tripapi
+    spec:
+      containers:
+        - name: tripapi
+          image: hacker3.azurecr.io/tripapi:v1
+          ports:
+            - containerPort: 80
+          env:
+            - name: WEB_PORT
+              value: "80"
+            - name: CONFIG_FILES_PATH
+              value: "/secrets"
+            - name: SQL_USER
+              value: "sqladminvOx1488"
+            - name: SQL_PASSWORD
+              value: "nH9fl8Tp7"
+            - name: SQL_SERVER
+              value: "sqlservervox1488.database.windows.net"
+            - name: SQL_DBNAME
+              value: "mydrivingDB"
+            - name: WEB_SERVER_BASE_URI
+              value: "http://tripapi"
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Production"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tripapi
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+  selector:
+    app: tripapi
